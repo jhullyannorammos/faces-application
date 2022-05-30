@@ -1,0 +1,47 @@
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:o="http://omnifaces.org/ui">
+
+
+	<ui:define name="corpo">
+	
+	     <f:metadata>
+			<o:viewParam name="modelo" value="#{cadastroModeloBean.modelo}" />
+			<f:viewAction action="#{cadastroModeloBean.inicializar()}" />
+		</f:metadata>
+		
+		<h:form id="form-modelos">
+		    <p:focus context="form-modelos" />
+		    <p:messages autoUpdate="true" closable="true"  />
+		    
+		    <p:toolbar style="margin-top: 20px;">
+		          <p:toolbarGroup>
+		                <p:commandButton action="#{cadastroModeloBean.persist()}" value="Salvar" id="botaoSalvar" process="@this panel-modelo" validateClient="false" />
+		          </p:toolbarGroup>
+		          <p:toolbarGroup align="right">
+		               <p:button value="Pesquisa" outcome="/modelos/PesquisaModelos.xhtml" />
+		          </p:toolbarGroup>
+		    </p:toolbar>
+		    
+		    
+		     <p:panelGrid id="panel-modelo" style="width: 100%; margin-top: 20px;" columns="2">
+		     
+		          <p:outputLabel value="Fabricante" for="fabricante" />
+		          <p:selectOneMenu id="fabricante" value="#{cadastroModeloBean.modelo.fabricante}">
+		               <f:selectItem itemLabel="Selecione o fabricante" />
+		               <f:selectItems value="#{cadastroModeloBean.fabricantes}" var="fabricante" itemLabel="#{fabricante.fabricante}" itemValue="#{fabricante}" />
+		          </p:selectOneMenu>
+		          
+		          <p:outputLabel value="Modelo" for="modelo" />
+		          <p:inputText id="modelo" value="#{cadastroModeloBean.modelo.modelo}" />
+		     </p:panelGrid>
+		    
+		    
+	    </h:form>
+	
+		</ui:define>
+</ui:composition>

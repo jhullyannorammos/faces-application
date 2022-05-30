@@ -1,0 +1,47 @@
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="corpo">
+	     <h:form id="form-pesquisa">
+	     
+	         <h1>Pesquisa de modelos</h1>
+	         <p:messages autoUpdate="true" closable="true" />
+	         
+	         <p:toolbar style="margin-top: 20px">
+	    		<p:toolbarGroup>
+	    			<p:commandButton value="Pesquisar" action="#{pesquisaModeloBean.pesquisar}"
+	    				update=":form-pesquisa:datatable-modelos" />
+	    		</p:toolbarGroup>
+	    		<p:toolbarGroup align="right">
+	    			<p:button value="Novo" outcome="/modelos/CadastroModelo.xhtml" />
+	    		</p:toolbarGroup>
+	    	</p:toolbar>
+	    	
+	    	<p:dataTable id="datatable-modelos" 
+	    	    value="#{pesquisaModeloBean.modelos}" 
+	    	    emptyMessage="Nenhum modelo encontrado." rows="20"
+	    		style="margin-top: 20px" 
+	    		paginatorAlwaysVisible="false" 
+	    		paginator="true" 
+	    		paginatorPosition="bottom"
+	    		var="modelo">
+	    		
+	    		<p:column headerText="Fabricante">
+	    			<h:outputText value="#{modelo.fabricante}" id="fabricante" />
+	    		</p:column>
+	    		
+	    		<p:column headerText="Modelo">
+	    			<h:outputText value="#{modelo.modelo}" id="modelo" />
+	    		</p:column>
+	    		
+	    		</p:dataTable>
+	     
+	     </h:form>
+	
+    </ui:define>
+</ui:composition>
